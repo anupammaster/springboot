@@ -2,6 +2,8 @@ package com.example.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -19,14 +21,14 @@ public class ShipmentController {
 		return "home.jsp";
 	}
 
-	@RequestMapping("/saveShipment")
+	@PostMapping(value = "/saveShipment")
 	public String saveShipment(Shipment shipment) {
+		System.out.println("recieved :: "+shipment);
 		repo.save(shipment);
 		return "home.jsp";
 	}
-	
-	@RequestMapping("/getShipments")
-	@ResponseBody
+
+	@GetMapping(value = "/getShipments")
 	public String getShipment() {
 		String ret = null;
 		ret = repo.findAll().toString();
